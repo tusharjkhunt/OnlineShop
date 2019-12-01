@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
 
   app.get("*", function(req, res) {
     res.sendFile(
-      path.resolve(__dirname, "ecommerce-client", "build", "index.html")
+      path.join(__dirname, "ecommerce-client", "build", "index.html")
     );
   });
 }
