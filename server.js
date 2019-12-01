@@ -44,21 +44,23 @@ app.use("/api", productRoutes);
 app.use("/api", braintreeRoutes);
 app.use("/api", orderRoutes);
 
-const port = process.env.PORT || 8000;
+/*const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-});
+});*/
 
 // production config
 app.use(compression());
-app.use(express.static(path.join(__dirname, "build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "build")));
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
