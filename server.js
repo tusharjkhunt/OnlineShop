@@ -53,10 +53,12 @@ app.listen(port, () => {
 // production config
 app.use(compression());
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "build")));
+  app.use(express.static("ecommerce-client/build"));
 
   app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+    res.sendFile(
+      path.resolve(__dirname, "ecommerce-client", "build", "index.html")
+    );
   });
 }
 
